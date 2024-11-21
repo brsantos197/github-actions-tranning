@@ -34,7 +34,7 @@ jobs:
             echo $host
             hosts+="\"$host\","
           done
-          echo 'hosts=${hosts}'
+          echo hosts=$hosts
           echo 'hosts=["1", "2",]' >> $GITHUB_OUTPUT
   deploy:
     runs-on: ubuntu-latest

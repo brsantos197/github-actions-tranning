@@ -1,7 +1,6 @@
 name: Deploy to hosts
 on:
   push:
-
 jobs:
   define-hosts:
     runs-on: ubuntu-latest
@@ -29,30 +28,12 @@ jobs:
             ${{ vars.HOST_14 }}
             ${{ vars.HOST_15 }}
           )
-            
-
-          # Obter a mensagem do commit
-          commit_message=${{ github.event.head_commit.message }}
-          echo "Commit message: $commit_message"
-
-          # Verificar se o commit contém '--hosts=[]'
-          if echo "$commit_message" | grep -q -- '--hosts=\['; then
-            # Extrair valores do array --hosts=[]
-            host_list=$(echo "$commit_message" | grep -oP '(?<=--hosts=\[).+?(?=\])')
-            echo "Hosts no commit: $host_list"
-          else
-            # Nenhum filtro, incluir todos os hosts
-            host_list=""
-          fi
 
           # Criar um array JSON válido
           json_hosts="["
           for host in "${ALL_HOSTS[@]}"; do
             if [ -n "$host" ]; then
-              # Se houver filtro, incluir apenas se o host estiver na lista
-              if [ -z "$host_list" ] || echo ",$host_list," | grep -q ",$host,"; then
-                json_hosts+="\"$host\","
-              fi
+              json_hosts+="\"$host\","
             fi
           done
           json_hosts="${json_hosts%,}]" # Remover a última vírgula e fechar o array

@@ -22,7 +22,8 @@ jobs:
           - ${{ github.event.ref == 'refs/heads/main' && vars.HOST_13 }}
           - ${{ github.event.ref == 'refs/heads/main' && vars.HOST_14 }}
           - ${{ github.event.ref == 'refs/heads/main' && vars.HOST_15 }}
-            
+        exclude:
+          - host: false
     steps:
       - name: Deploy to hosts
         if: ${{ matrix.host }}

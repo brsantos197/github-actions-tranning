@@ -2,7 +2,8 @@ name: Deploy to hosts
 on:
   push:
 
-
+env:
+  ALL_HOSTS: ${{ vars.HOST_1 }}, ${{ vars.HOST_2 }}, ${{ vars.HOST_3 }}
 jobs:
   define-hosts:
     runs-on: ubuntu-latest
@@ -13,11 +14,8 @@ jobs:
       - name: Define hosts
         id: define-hosts
         run: |
-          echo 'hosts=[
-            "${{ vars.HOST_1 }}",
-            "${{ vars.HOST_2 }}",
-            "${{ vars.HOST_3 }}
-          "]' >> $GITHUB_OUTPUT
+          echo 'hosts=[${{ env.ALL_HOSTS }}]'
+          echo 'hosts=[${{ env.ALL_HOSTS }}]' >> $GITHUB_OUTPUT
   deploy:
     runs-on: ubuntu-latest
     needs: define-hosts

@@ -6,11 +6,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        exclude:
-          - host: ${{ vars.HOST_1 }}
-        host:
+        staging:
           - ${{ vars.HOST_1 }}
           - ${{ vars.HOST_2 }}
+        host:
           - ${{ vars.HOST_3 }}
           - ${{ vars.HOST_4 }}
           - ${{ vars.HOST_5 }}

@@ -7,10 +7,8 @@ jobs:
     strategy:
       matrix:
           host:
-          - production:
-              - ${{ vars.HOST_1 }}
-              - ${{ vars.HOST_2 }}
-          - staging:
+            - ${{ vars.HOST_1 }}
+            - ${{ vars.HOST_2 }}
             - ${{ vars.HOST_3 }}
             - ${{ vars.HOST_4 }}
             - ${{ vars.HOST_5 }}
@@ -24,7 +22,9 @@ jobs:
             - ${{ vars.HOST_13 }}
             - ${{ vars.HOST_14 }}
             - ${{ vars.HOST_15 }}
-          
+          exclude:
+            - ${{ github.event.ref == 'refs/heads/main' && vars.HOST_1 }}
+            - ${{ github.event.ref == 'refs/heads/main' && vars.HOST_2 }}
     steps:
       - name: Deploy to hosts
         if: ${{ matrix.host.staging }}

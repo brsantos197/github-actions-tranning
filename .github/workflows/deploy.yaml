@@ -13,8 +13,8 @@ jobs:
         id: define-hosts
         run: |
           ALL_HOSTS=(
-            ${{ vars.HOST_2 }}
             ${{ vars.HOST_1 }}
+            ${{ vars.HOST_2 }}
             ${{ vars.HOST_3 }}
             ${{ vars.HOST_4 }}
             ${{ vars.HOST_5 }}
@@ -34,6 +34,8 @@ jobs:
             echo $host
             hosts+="\"$host\","
           done
+          echo 'hosts=$hosts'
+          echo 'hosts=["1", "2"]'
           echo hosts=$hosts >> $GITHUB_OUTPUT
   deploy:
     runs-on: ubuntu-latest

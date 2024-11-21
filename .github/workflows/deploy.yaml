@@ -29,20 +29,27 @@ jobs:
             ${{ vars.HOST_14 }}
             ${{ vars.HOST_15 }}
           )
-          hosts="hosts="
-          for host in ${ALL_HOSTS[@]}; do
-            echo $host
-            hosts+="\'$host\',"
+
+          # Criar um array JSON válido
+          json_hosts="["
+          for host in "${ALL_HOSTS[@]}"; do
+            if [ -n "$host" ]; then
+              json_hosts+="\"$host\","
+            fi
           done
-          echo $hosts
-          echo $hosts >> $GITHUB_OUTPUT
+          json_hosts="${json_hosts%,}]" # Remover a última vírgula e fechar o array
+
+          echo "hosts=$json_hosts" >> $GITHUB_OUTPUT
+          echo "JSON hosts: $json_hosts"
+
   deploy:
     runs-on: ubuntu-latest
     needs: define-hosts
     strategy:
       matrix:
         host: ${{ fromJson(needs.define-hosts.outputs.hosts) }}
+
     steps:
       - name: Deploy to hosts
         run: |
-          echo "Deploying to hosts... matrix: ${{ matrix.host }}"
+          echo "Deploying to host: ${{ matrix.host }}"

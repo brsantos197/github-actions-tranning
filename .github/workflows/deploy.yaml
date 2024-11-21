@@ -7,7 +7,10 @@ jobs:
     strategy:
       matrix:
         environment: [staging, production]
-        host: []
+        host:
+          - ${{ vars.HOST_1 }}
+          - ${{ vars.HOST_2 }}
+          - ${{ vars.HOST_3 }}
           # - ${{ vars.HOST_4 }}
           # - ${{ vars.HOST_5 }}
           # - ${{ vars.HOST_6 }}
@@ -20,7 +23,7 @@ jobs:
           # - ${{ vars.HOST_13 }}
           # - ${{ vars.HOST_14 }}
           # - ${{ vars.HOST_15 }}
-        include:
+        exclude:
           - environment: staging
             host: ${{ vars.HOST_1 }}
           

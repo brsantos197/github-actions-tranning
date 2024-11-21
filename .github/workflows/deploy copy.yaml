@@ -1,0 +1,56 @@
+name: Deploy to hosts
+on:
+  push:
+    branches: 
+      - teste
+jobs:
+  define-hosts:
+    runs-on: ubuntu-latest
+    outputs:
+      hosts: ${{ steps.define-hosts.outputs.hosts }}
+
+    steps:
+      - name: Define hosts
+        id: define-hosts
+        run: |
+          ALL_HOSTS=(
+            ${{ vars.HOST_1 }}
+            ${{ vars.HOST_2 }}
+            ${{ vars.HOST_3 }}
+            ${{ vars.HOST_4 }}
+            ${{ vars.HOST_5 }}
+            ${{ vars.HOST_6 }}
+            ${{ vars.HOST_7 }}
+            ${{ vars.HOST_8 }}
+            ${{ vars.HOST_9 }}
+            ${{ vars.HOST_10 }}
+            ${{ vars.HOST_11 }}
+            ${{ vars.HOST_12 }}
+            ${{ vars.HOST_13 }}
+            ${{ vars.HOST_14 }}
+            ${{ vars.HOST_15 }}
+          )
+
+          # Criar um array JSON válido
+          json_hosts="["
+          for host in "${ALL_HOSTS[@]}"; do
+            if [ -n "$host" ]; then
+              json_hosts+="\"$host\","
+            fi
+          done
+          json_hosts="${json_hosts%,}]" # Remover a última vírgula e fechar o array
+
+          echo "hosts=$json_hosts" >> $GITHUB_OUTPUT
+          echo "JSON hosts: $json_hosts"
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: define-hosts
+    strategy:
+      matrix:
+        host: ${{ fromJson(needs.define-hosts.outputs.hosts) }}
+
+    steps:
+      - name: Deploy to hosts
+        run: |
+          echo "Deploying to host: ${{ matrix.host }}"

@@ -7,7 +7,7 @@ jobs:
     strategy:
       matrix:
         environment: [staging, production]
-        
+        host: []
           # - ${{ vars.HOST_4 }}
           # - ${{ vars.HOST_5 }}
           # - ${{ vars.HOST_6 }}

@@ -4,9 +4,7 @@ on:
 
 env:
   ALL_HOSTS: |
-    "${{ vars.HOST_1 }}",
-    "${{ vars.HOST_2 }}",
-    "${{ vars.HOST_3 }}"
+    "${{ vars.HOST_1 }}", "${{ vars.HOST_2 }}", "${{ vars.HOST_3 }}"
 jobs:
   define-hosts:
     runs-on: ubuntu-latest

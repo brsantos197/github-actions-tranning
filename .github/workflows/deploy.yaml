@@ -6,26 +6,44 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        include:
-          - stage: staging
+        environment: [staging, production]
+        host:
+          - ${{ vars.HOST_1 }}
+          - ${{ vars.HOST_2 }}
+          - ${{ vars.HOST_3 }}
+          - ${{ vars.HOST_4 }}
+          - ${{ vars.HOST_5 }}
+          - ${{ vars.HOST_6 }}
+          - ${{ vars.HOST_7 }}
+          - ${{ vars.HOST_8 }}
+          - ${{ vars.HOST_9 }}
+          - ${{ vars.HOST_10 }}
+          - ${{ vars.HOST_11 }}
+          - ${{ vars.HOST_12 }}
+          - ${{ vars.HOST_13 }}
+          - ${{ vars.HOST_14 }}
+          - ${{ vars.HOST_15 }}
+        exclude:
+          - environment: staging
             host:
-            - ${{ vars.HOST_1 }}
-            - ${{ vars.HOST_2 }}
-          - stage: production
+              - ${{ vars.HOST_3 }}
+              - ${{ vars.HOST_4 }}
+              - ${{ vars.HOST_5 }}
+              - ${{ vars.HOST_6 }}
+              - ${{ vars.HOST_7 }}
+              - ${{ vars.HOST_8 }}
+              - ${{ vars.HOST_9 }}
+              - ${{ vars.HOST_10 }}
+              - ${{ vars.HOST_11 }}
+              - ${{ vars.HOST_12 }}
+              - ${{ vars.HOST_13 }}
+              - ${{ vars.HOST_14 }}
+              - ${{ vars.HOST_15 }}
+          
+          - environment: production
             host:
-            - ${{ vars.HOST_3 }}
-            - ${{ vars.HOST_4 }}
-            - ${{ vars.HOST_5 }}
-            - ${{ vars.HOST_6 }}
-            - ${{ vars.HOST_7 }}
-            - ${{ vars.HOST_8 }}
-            - ${{ vars.HOST_9 }}
-            - ${{ vars.HOST_10 }}
-            - ${{ vars.HOST_11 }}
-            - ${{ vars.HOST_12 }}
-            - ${{ vars.HOST_13 }}
-            - ${{ vars.HOST_14 }}
-            - ${{ vars.HOST_15 }}
+              - ${{ vars.HOST_1 }}
+              - ${{ vars.HOST_2 }}
     steps:
       - name: Deploy to hosts
         run: |

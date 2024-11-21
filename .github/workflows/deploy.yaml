@@ -6,22 +6,22 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-          include:
-            - host: ${{ github.event.ref == 'refs/heads/staging' && vars.HOST_1 }}
-            - host: ${{ github.event.ref == 'refs/heads/staging' && vars.HOST_2 }}
-            - host: ${{ github.event.ref == 'refs/heads/main' && vars.HOST_3 }}
-            - host: ${{ github.event.ref == 'refs/heads/main' && vars.HOST_4 }}
-            - host: ${{ github.event.ref == 'refs/heads/main' && vars.HOST_5 }}
-            - host: ${{ github.event.ref == 'refs/heads/main' && vars.HOST_6 }}
-            - host: ${{ github.event.ref == 'refs/heads/main' && vars.HOST_7 }}
-            - host: ${{ github.event.ref == 'refs/heads/main' && vars.HOST_8 }}
-            - host: ${{ github.event.ref == 'refs/heads/main' && vars.HOST_9 }}
-            - host: ${{ github.event.ref == 'refs/heads/main' && vars.HOST_10 }}
-            - host: ${{ github.event.ref == 'refs/heads/main' && vars.HOST_11 }}
-            - host: ${{ github.event.ref == 'refs/heads/main' && vars.HOST_12 }}
-            - host: ${{ github.event.ref == 'refs/heads/main' && vars.HOST_13 }}
-            - host: ${{ github.event.ref == 'refs/heads/main' && vars.HOST_14 }}
-            - host: ${{ github.event.ref == 'refs/heads/main' && vars.HOST_15 }}
+        host:
+          - ${{ github.event.ref == 'refs/heads/staging' && vars.HOST_1 }}
+          - ${{ github.event.ref == 'refs/heads/staging' && vars.HOST_2 }}
+          - ${{ github.event.ref == 'refs/heads/main' && vars.HOST_3 }}
+          - ${{ github.event.ref == 'refs/heads/main' && vars.HOST_4 }}
+          - ${{ github.event.ref == 'refs/heads/main' && vars.HOST_5 }}
+          - ${{ github.event.ref == 'refs/heads/main' && vars.HOST_6 }}
+          - ${{ github.event.ref == 'refs/heads/main' && vars.HOST_7 }}
+          - ${{ github.event.ref == 'refs/heads/main' && vars.HOST_8 }}
+          - ${{ github.event.ref == 'refs/heads/main' && vars.HOST_9 }}
+          - ${{ github.event.ref == 'refs/heads/main' && vars.HOST_10 }}
+          - ${{ github.event.ref == 'refs/heads/main' && vars.HOST_11 }}
+          - ${{ github.event.ref == 'refs/heads/main' && vars.HOST_12 }}
+          - ${{ github.event.ref == 'refs/heads/main' && vars.HOST_13 }}
+          - ${{ github.event.ref == 'refs/heads/main' && vars.HOST_14 }}
+          - ${{ github.event.ref == 'refs/heads/main' && vars.HOST_15 }}
             
     steps:
       - name: Deploy to hosts

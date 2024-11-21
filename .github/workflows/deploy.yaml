@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        include:
+        exclude:
           - host: ${{ vars.HOST_1 }}
         host:
           - ${{ vars.HOST_1 }}

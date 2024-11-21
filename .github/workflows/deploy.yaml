@@ -9,21 +9,21 @@ jobs:
     strategy:
       matrix:
         host: [
-          "${{ !contains(github.event.commits.message, '--host') && contains(github.event.commits.message, '--host1') && vars.HOST_1 }}",
-          "${{ !contains(github.event.commits.message, '--host') && contains(github.event.commits.message, '--host2') && vars.HOST_2 }}",
-          "${{ !contains(github.event.commits.message, '--host') && contains(github.event.commits.message, '--host3') && vars.HOST_3 }}",
-          "${{ !contains(github.event.commits.message, '--host') && contains(github.event.commits.message, '--host4') && vars.HOST_4 }}",
-          "${{ !contains(github.event.commits.message, '--host') && contains(github.event.commits.message, '--host5') && vars.HOST_5 }}",
-          "${{ !contains(github.event.commits.message, '--host') && contains(github.event.commits.message, '--host6') && vars.HOST_6 }}",
-          "${{ !contains(github.event.commits.message, '--host') && contains(github.event.commits.message, '--host7') && vars.HOST_7 }}",
-          "${{ !contains(github.event.commits.message, '--host') && contains(github.event.commits.message, '--host8') && vars.HOST_8 }}",
-          "${{ !contains(github.event.commits.message, '--host') && contains(github.event.commits.message, '--host9') && vars.HOST_9 }}",
-          "${{ !contains(github.event.commits.message, '--host') && contains(github.event.commits.message, '--host10') && vars.HOST_10 }}",
-          "${{ !contains(github.event.commits.message, '--host') && contains(github.event.commits.message, '--host11') && vars.HOST_11 }}",
-          "${{ !contains(github.event.commits.message, '--host') && contains(github.event.commits.message, '--host12') && vars.HOST_12 }}",
-          "${{ !contains(github.event.commits.message, '--host') && contains(github.event.commits.message, '--host13') && vars.HOST_13 }}",
-          "${{ !contains(github.event.commits.message, '--host') && contains(github.event.commits.message, '--host14') && vars.HOST_14 }}",
-          "${{ !contains(github.event.commits.message, '--host') && contains(github.event.commits.message, '--host15') && vars.HOST_15 }}"
+          "${{ contains(github.event.commits.message, '--host1') && vars.HOST_1 }}",
+          "${{ contains(github.event.commits.message, '--host2') && vars.HOST_2 }}",
+          "${{ contains(github.event.commits.message, '--host3') && vars.HOST_3 }}",
+          "${{ contains(github.event.commits.message, '--host4') && vars.HOST_4 }}",
+          "${{ contains(github.event.commits.message, '--host5') && vars.HOST_5 }}",
+          "${{ contains(github.event.commits.message, '--host6') && vars.HOST_6 }}",
+          "${{ contains(github.event.commits.message, '--host7') && vars.HOST_7 }}",
+          "${{ contains(github.event.commits.message, '--host8') && vars.HOST_8 }}",
+          "${{ contains(github.event.commits.message, '--host9') && vars.HOST_9 }}",
+          "${{ contains(github.event.commits.message, '--host10') && vars.HOST_10 }}",
+          "${{ contains(github.event.commits.message, '--host11') && vars.HOST_11 }}",
+          "${{ contains(github.event.commits.message, '--host12') && vars.HOST_12 }}",
+          "${{ contains(github.event.commits.message, '--host13') && vars.HOST_13 }}",
+          "${{ contains(github.event.commits.message, '--host14') && vars.HOST_14 }}",
+          "${{ contains(github.event.commits.message, '--host15') && vars.HOST_15 }}"
         ]
     steps:
       - name: Deploy to hosts

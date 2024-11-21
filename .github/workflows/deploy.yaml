@@ -32,7 +32,7 @@ jobs:
           hosts="hosts="
           for host in ${ALL_HOSTS[@]}; do
             echo $host
-            hosts+="\"$host\","
+            hosts+="\'$host\',"
           done
           echo $hosts
           echo $hosts >> $GITHUB_OUTPUT

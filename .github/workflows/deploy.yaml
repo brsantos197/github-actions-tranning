@@ -12,6 +12,7 @@ jobs:
           echo 'hosts=["${{ vars.HOST_1 }}", "${{ vars.HOST_2 }}", "${{ vars.HOST_3 }}"]' >> $GITHUB_OUTPUT
   deploy:
     runs-on: ubuntu-latest
+    needs: define-hosts
     strategy:
       matrix:
         host: ${{ fromJson(needs.define-hosts.outputs.hosts) }}

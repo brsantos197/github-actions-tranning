@@ -29,6 +29,7 @@ jobs:
             ${{ vars.HOST_14 }}
             ${{ vars.HOST_15 }}
           )
+            
 
           # Obter a mensagem do commit
           commit_message=${{ github.event.head_commit.message }}

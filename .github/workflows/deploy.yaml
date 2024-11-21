@@ -23,8 +23,8 @@ jobs:
             - ${{ vars.HOST_14 }}
             - ${{ vars.HOST_15 }}
           exclude:
-            - ${{ github.event.ref == 'refs/heads/main' && vars.HOST_1 }}
-            - ${{ github.event.ref == 'refs/heads/main' && vars.HOST_2 }}
+            - host: ${{ github.event.ref == 'refs/heads/main' && vars.HOST_1 }}
+            - host: ${{ github.event.ref == 'refs/heads/main' && vars.HOST_2 }}
     steps:
       - name: Deploy to hosts
         if: ${{ matrix.host.staging }}

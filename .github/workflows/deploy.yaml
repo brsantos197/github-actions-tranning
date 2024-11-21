@@ -6,26 +6,27 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        staging:
-          - ${{ vars.HOST_1 }}
-          - ${{ vars.HOST_2 }}
-        production:
-          - ${{ vars.HOST_3 }}
-          - ${{ vars.HOST_4 }}
-          - ${{ vars.HOST_5 }}
-          - ${{ vars.HOST_6 }}
-          - ${{ vars.HOST_7 }}
-          - ${{ vars.HOST_8 }}
-          - ${{ vars.HOST_9 }}
-          - ${{ vars.HOST_10 }}
-          - ${{ vars.HOST_11 }}
-          - ${{ vars.HOST_12 }}
-          - ${{ vars.HOST_13 }}
-          - ${{ vars.HOST_14 }}
-          - ${{ vars.HOST_15 }}
+          host:
+          - production:
+              - ${{ vars.HOST_1 }}
+              - ${{ vars.HOST_2 }}
+          - staging:
+            - ${{ vars.HOST_3 }}
+            - ${{ vars.HOST_4 }}
+            - ${{ vars.HOST_5 }}
+            - ${{ vars.HOST_6 }}
+            - ${{ vars.HOST_7 }}
+            - ${{ vars.HOST_8 }}
+            - ${{ vars.HOST_9 }}
+            - ${{ vars.HOST_10 }}
+            - ${{ vars.HOST_11 }}
+            - ${{ vars.HOST_12 }}
+            - ${{ vars.HOST_13 }}
+            - ${{ vars.HOST_14 }}
+            - ${{ vars.HOST_15 }}
           
     steps:
       - name: Deploy to hosts
-        if: ${{ matrix.staging }}
+        if: ${{ matrix.host.staging }}
         run: |
-          echo "Deploying to host: ${{ matrix.production || matrix.staging }}"
+          echo "Deploying to host: ${{ matrix.host }}"

@@ -29,14 +29,13 @@ jobs:
             ${{ vars.HOST_14 }}
             ${{ vars.HOST_15 }}
           )
-          hosts=""
+          hosts="hosts="
           for host in ${ALL_HOSTS[@]}; do
             echo $host
             hosts+="\"$host\","
           done
-          echo 'hosts=$hosts'
-          echo 'hosts=["1", "2"]'
-          echo "hosts=$hosts" >> $GITHUB_OUTPUT
+          echo $hosts
+          echo $hosts >> $GITHUB_OUTPUT
   deploy:
     runs-on: ubuntu-latest
     needs: define-hosts

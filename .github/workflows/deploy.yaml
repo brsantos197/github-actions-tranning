@@ -26,5 +26,6 @@ jobs:
           
     steps:
       - name: Deploy to hosts
+        if: ${{ matrix.staging }}
         run: |
           echo "Deploying to host: ${{ matrix.production || matrix.staging }}"

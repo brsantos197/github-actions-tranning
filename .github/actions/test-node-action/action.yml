@@ -20,4 +20,4 @@ runs:
 
     - name: Executar script Node.js
       run: |
-        node ./index.js
+        node index.js

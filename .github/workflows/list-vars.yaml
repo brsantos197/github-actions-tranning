@@ -15,7 +15,7 @@ jobs:
       - name: Usar minha ação personalizada
         uses: ./.github/actions/test-node-action
         with:
-          vars: '{ "teste": "value" }'
+          vars: ${{ toJson(vars) }}
 
       # - name: List all vars
       #   uses: easyware-io/export-to-env@v1

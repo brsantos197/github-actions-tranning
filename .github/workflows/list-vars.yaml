@@ -9,6 +9,9 @@ jobs:
   list-vars:
     runs-on: ubuntu-latest
     steps:
+      - name: Usar minha ação personalizada
+        uses: ./.github/actions/test-node-action
+
       - name: List all vars
         uses: easyware-io/export-to-env@v1
         with:

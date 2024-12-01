@@ -2,28 +2,25 @@ name: Deploy to hosts
 on:
   push:
 jobs:
+  vars:
+    runs-on: ubuntu-latest
+    outputs:
+      vars: ${{ steps.vars.outputs.vars }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Usar minha ação personalizada
+        uses: ./.github/actions/test-node-action
+        with:
+          vars: ${{ toJson(vars) }}
+        id: vars
+    
   deploy:
+    needs: vars
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        host:
-          - ${{ github.event.ref == 'refs/heads/staging' && vars.HOST_1 }}
-          - ${{ github.event.ref == 'refs/heads/staging' && vars.HOST_2 }}
-          - ${{ github.event.ref == 'refs/heads/main' && vars.HOST_3 }}
-          - ${{ github.event.ref == 'refs/heads/main' && vars.HOST_4 }}
-          - ${{ github.event.ref == 'refs/heads/main' && vars.HOST_5 }}
-          - ${{ github.event.ref == 'refs/heads/main' && vars.HOST_6 }}
-          - ${{ github.event.ref == 'refs/heads/main' && vars.HOST_7 }}
-          - ${{ github.event.ref == 'refs/heads/main' && vars.HOST_8 }}
-          - ${{ github.event.ref == 'refs/heads/main' && vars.HOST_9 }}
-          - ${{ github.event.ref == 'refs/heads/main' && vars.HOST_10 }}
-          - ${{ github.event.ref == 'refs/heads/main' && vars.HOST_11 }}
-          - ${{ github.event.ref == 'refs/heads/main' && vars.HOST_12 }}
-          - ${{ github.event.ref == 'refs/heads/main' && vars.HOST_13 }}
-          - ${{ github.event.ref == 'refs/heads/main' && vars.HOST_14 }}
-          - ${{ github.event.ref == 'refs/heads/main' && vars.HOST_15 }}
-        exclude:
-          - host: false
+        host: ${{ fromJson(needs.vars.outputs.vars) }}
     steps:
       - name: Deploy to hosts
         if: ${{ matrix.host }}

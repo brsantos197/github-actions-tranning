@@ -18,6 +18,11 @@ runs:
       with:
         node-version: ${{ inputs.node_version }}
 
+    - name: Instalar dependências
+      run: |
+        npm install
+      shell: bash
+
     - name: Executar script Node.js
       run: |
         node ./index.js

@@ -16,6 +16,7 @@ jobs:
         uses: ./.github/actions/test-node-action
         with:
           vars: ${{ toJson(vars) }}
+          node-version: "16"
 
       # - name: List all vars
       #   uses: easyware-io/export-to-env@v1

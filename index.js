@@ -1,8 +1,3 @@
-import { getInput } from "@actions/core";
+const args = process.argv.slice(2);
 
-const main = async () => {
-  const vars = getInput("vars");
-  console.log(`vars ${Boolean(vars)}!`);
-};
-
-main();
+console.log(args);

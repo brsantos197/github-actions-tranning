@@ -30,5 +30,5 @@ runs:
       run: |
         echo "Variáveis de ambiente: ${{ inputs.vars }}"
         echo "Node.js version: ${{ inputs.node_version }}"
-        node ./index.js
+        node ./index.js ${{ inputs.vars }}
       shell: bash

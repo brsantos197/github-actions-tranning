@@ -4,7 +4,7 @@ description: 'Uma action para executar um script Node.js'
 inputs:
   node_version:
     description: 'Versão do Node.js a ser usada'
-    required: true
+    required: false
     default: '20'
 
 runs:

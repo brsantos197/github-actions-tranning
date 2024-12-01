@@ -14,6 +14,12 @@ jobs:
         with:
           vars: ${{ toJson(vars) }}
         id: vars
+  log:
+    runs-on: ubuntu-latest
+    needs: vars
+    steps:
+      - name: Log vars
+        run: echo ${{ needs.vars.outputs.vars.HOSTS }} 
 
   deploy:
     needs: vars

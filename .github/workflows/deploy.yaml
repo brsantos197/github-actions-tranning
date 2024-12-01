@@ -5,7 +5,7 @@ jobs:
   vars:
     runs-on: ubuntu-latest
     outputs:
-      vars: ${{ steps.vars.outputs.vars }}
+      vars: ${{ steps.vars.outputs.HOSTS }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3

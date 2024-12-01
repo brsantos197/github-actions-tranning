@@ -13,4 +13,4 @@ jobs:
         uses: easyware-io/export-to-env@v1
         with:
           vars: ${{ toJSON(vars) }}
-      - run: echo env
+      - run: echo ${{ env }}

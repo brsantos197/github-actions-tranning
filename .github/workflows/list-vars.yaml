@@ -10,12 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: List all vars
-        run: |
-          echo "Listing all variables from vars context:"
-          for var in $(env); do
-            echo "$var"
-          done
-        env:
-          # Exponha aqui variáveis específicas, caso necessário
-          MY_VAR_1: ${{ vars.MY_VAR_1 }}
-          MY_VAR_2: ${{ vars.MY_VAR_2 }}
+        uses: easyware-io/export-to-env@v1
+        with:
+          vars: ${{ toJSON(vars) }}
+      - run: echo env

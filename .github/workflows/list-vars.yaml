@@ -14,15 +14,20 @@ jobs:
         with:
           vars: ${{ toJSON(vars) }}
       - run: |
+          # Prefixo para filtrar
+          prefix="MY_PREFIX_"
+
           # Criar um array vazio
-            declare -a env_array
+          declare -a filtered_env_array
 
-            # Preencher o array com todas as variáveis de ambiente
-            while IFS='=' read -r name value; do
-              env_array+=("$name=$value")
-            done < <(env)
+          # Filtrar as variáveis de ambiente que começam com o prefixo
+          while IFS='=' read -r name value; do
+            if [[ "$name" == $prefix* ]]; then
+              filtered_env_array+=("$name=$value")
+            fi
+          done < <(env)
 
-            # Exibir todas as variáveis de ambiente armazenadas no array
-            for var in "${env_array[@]}"; do
-              echo "$var"
-            done
+          # Exibir as variáveis de ambiente filtradas
+          for var in "${filtered_env_array[@]}"; do
+            echo "$var"
+          done

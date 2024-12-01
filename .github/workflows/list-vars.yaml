@@ -14,27 +14,28 @@ jobs:
 
       - name: Usar minha ação personalizada
         uses: ./.github/actions/test-node-action
-        
-
-      - name: List all vars
-        uses: easyware-io/export-to-env@v1
         with:
-          vars: ${{ toJSON(varS) }}
-      - run: |
-          # Prefixo para filtrar
-          prefix="HOST_"
+          vars: '{ "teste": "value" }'
 
-          # Criar um array vazio
-          declare -a filtered_env_array
+      # - name: List all vars
+      #   uses: easyware-io/export-to-env@v1
+      #   with:
+      #     vars: ${{ toJSON(varS) }}
+      # - run: |
+      #     # Prefixo para filtrar
+      #     prefix="HOST_"
 
-          # Filtrar as variáveis de ambiente que começam com o prefixo
-          while IFS='=' read -r name value; do
-            if [[ "$name" == $prefix* ]]; then
-              filtered_env_array+=("'$value'")
-            fi
-          done < <(env)
+      #     # Criar um array vazio
+      #     declare -a filtered_env_array
 
-          # Exibir as variáveis de ambiente filtradas
-          for var in "${filtered_env_array[@]}"; do
-            echo "$var"
-          done
+      #     # Filtrar as variáveis de ambiente que começam com o prefixo
+      #     while IFS='=' read -r name value; do
+      #       if [[ "$name" == $prefix* ]]; then
+      #         filtered_env_array+=("'$value'")
+      #       fi
+      #     done < <(env)
+
+      #     # Exibir as variáveis de ambiente filtradas
+      #     for var in "${filtered_env_array[@]}"; do
+      #       echo "$var"
+      #     done

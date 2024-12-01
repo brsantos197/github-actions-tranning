@@ -7,4 +7,6 @@ const varsObject = JSON.parse(varsString.replace(/\n/g, ''));
 
 const varsArray = Object.values(varsObject).map((value) => `"${String(value).trim()}"`);
 
+
+console.log(varsArray)
 writeFileSync('vars.txt', `[${String(varsArray)}]`, 'utf8')

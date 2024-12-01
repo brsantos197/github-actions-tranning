@@ -12,7 +12,7 @@ jobs:
       - name: List all vars
         uses: easyware-io/export-to-env@v1
         with:
-          vars: ${{ toJSON(vars) }}
+          vars: ${{ toJSON(varS) }}
       - run: |
           # Prefixo para filtrar
           prefix="HOST_"
@@ -23,7 +23,7 @@ jobs:
           # Filtrar as variáveis de ambiente que começam com o prefixo
           while IFS='=' read -r name value; do
             if [[ "$name" == $prefix* ]]; then
-              filtered_env_array+=("$name=$value")
+              filtered_env_array+=("'$value'")
             fi
           done < <(env)
 

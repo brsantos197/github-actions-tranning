@@ -32,8 +32,8 @@ runs:
 
     - name: Executar script Node.js
       run: |
-        echo ${{ env.HOST_1 }}
+        echo ${{ env.HOSTS }}
         node ./index.js --vars='${{ inputs.vars }}'
-        echo "hosts=$(cat vars.txt)" >> $GITHUB_ENV
-        echo ${{ env.HOST_1 }}
+        echo "HOSTS=$(cat vars.txt)" >> $GITHUB_ENV
+        echo ${{ env.HOSTS }}
       shell: bash

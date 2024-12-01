@@ -35,5 +35,5 @@ runs:
         echo ${{ env.HOSTS }}
         node ./index.js --vars='${{ inputs.vars }}'
         echo "HOSTS=$(cat vars.txt)" >> $GITHUB_ENV
-        env
+        echo "${{ env.HOSTS }}"
       shell: bash

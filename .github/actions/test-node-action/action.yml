@@ -28,5 +28,7 @@ runs:
 
     - name: Executar script Node.js
       run: |
+        echo "Variáveis de ambiente: ${{ inputs.vars }}"
+        echo "Node.js version: ${{ inputs.node_version }}"
         node ./index.js
       shell: bash

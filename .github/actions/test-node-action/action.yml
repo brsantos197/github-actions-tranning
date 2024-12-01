@@ -6,7 +6,8 @@ inputs:
     description: 'Variáveis de ambiente'
     required: false
     default: '{
-      "var1": "value1"
+      "var1": "value1",
+      "var2": "value2"
       }'
   node_version:
     description: 'Versão do Node.js a ser usada'
@@ -31,8 +32,5 @@ runs:
 
     - name: Executar script Node.js
       run: |
-        echo "Variáveis de ambiente: ${{ inputs.vars }}"
-        echo "Node.js version: ${{ inputs.node_version }}"
-        single_line=$(echo "${{ inputs.vars }}" | tr '\n' ' ')
-        node ./index.js $single_line
+        node ./index.js --vars="${{ inputs.vars }}"
       shell: bash

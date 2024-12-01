@@ -2,6 +2,10 @@ name: 'My Node.js Action'
 description: 'Uma action para executar um script Node.js'
 
 inputs:
+  vars:
+    description: 'Variáveis de ambiente'
+    required: 
+    default: '{}'
   node_version:
     description: 'Versão do Node.js a ser usada'
     required: false

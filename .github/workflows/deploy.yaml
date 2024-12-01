@@ -19,7 +19,7 @@ jobs:
     needs: vars
     steps:
       - name: Log vars
-        run: echo ${{ needs.vars.outputs.vars.HOSTS }} 
+        run: echo "LOGS ${{ needs.vars.outputs.vars }}"
 
   deploy:
     needs: vars

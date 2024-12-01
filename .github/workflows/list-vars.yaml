@@ -13,4 +13,16 @@ jobs:
         uses: easyware-io/export-to-env@v1
         with:
           vars: ${{ toJSON(vars) }}
-      - run: echo ${{ env }}
+      - run: |
+          # Criar um array vazio
+            declare -a env_array
+
+            # Preencher o array com todas as variáveis de ambiente
+            while IFS='=' read -r name value; do
+              env_array+=("$name=$value")
+            done < <(env)
+
+            # Exibir todas as variáveis de ambiente armazenadas no array
+            for var in "${env_array[@]}"; do
+              echo "$var"
+            done

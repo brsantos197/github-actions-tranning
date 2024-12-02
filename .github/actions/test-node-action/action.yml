@@ -1,47 +1,26 @@
-name: 'My Node.js Action'
-description: 'Uma action para executar um script Node.js'
+name: Reusable workflow
 
-inputs:
-  vars:
-    description: 'Variáveis de ambiente'
-    required: false
-    default: '{
-      "var1": "value1",
-      "var2": "value2"
-    }'
-  node_version:
-    description: 'Versão do Node.js a ser usada'
-    required: false
-    default: '20.11.1'
+on:
+  workflow_call:
+    # Map the workflow outputs to job outputs
+    outputs:
+      firstword:
+        description: "The first output string"
+        value: ${{ jobs.example_job.outputs.output1 }}
+      secondword:
+        description: "The second output string"
+        value: ${{ jobs.example_job.outputs.output2 }}
 
-outputs:
-  HOSTS:
-    description: 'Lista de hosts gerada pelo script'
-
-runs:
-  using: 'composite'
-  steps:
-    - name: Checkout código
-      uses: actions/checkout@v3
-
-    - name: Configurar Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ inputs.node_version }}
-
-    - name: Instalar dependências
-      run: npm install
-      shell: bash
-
-    - name: Executar script Node.js
-      run: |
-        # Passa as variáveis para o script Node.js
-        node ./index.js --vars='${{ inputs.vars }}'
-
-        # Exibe informações de debug (remova em produção)
-        ls -la
-        cat vars.txt
-
-        # Define o output esperado
-        echo "HOSTS=$(cat vars.txt)" >> $GITHUB_OUTPUT
-      shell: bash
+jobs:
+  example_job:
+    name: Generate output
+    runs-on: ubuntu-latest
+    # Map the job outputs to step outputs
+    outputs:
+      output1: ${{ steps.step1.outputs.firstword }}
+      output2: ${{ steps.step2.outputs.secondword }}
+    steps:
+      - id: step1
+        run: echo "firstword=hello" >> $GITHUB_OUTPUT
+      - id: step2
+        run: echo "secondword=world" >> $GITHUB_OUTPUT

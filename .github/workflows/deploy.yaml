@@ -17,17 +17,12 @@ jobs:
         with:
           vars: ${{ toJson(vars) }}
         id: generate-vars
-      - run: |
-          echo "TEST: ${{ steps.generate-vars.outputs.TEST }}"
-          echo "test: ${{ steps.generate-vars.outputs.test }}"
-          echo "HOST: ${{ steps.generate-vars.outputs.HOSTS }}"
-          echo "Hosts: ${{ steps.generate-vars.outputs.hosts }}"
   log:
     runs-on: ubuntu-latest
     needs: generate-vars
     steps:
       - name: Log vars
-        run: echo "LOGS ${{ needs.generate-vars.outputs.hosts }}"
+        run: cat vars.txt
 
   # deploy:
   #   needs: generate-vars

@@ -11,6 +11,8 @@ jobs:
     outputs:
       hosts: ${{ steps.custom-action.outputs.HOSTS }}
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
       - name: Usar a ação reutilizável
         uses: ./.github/actions/test-node-action
         with:

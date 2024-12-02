@@ -44,3 +44,4 @@ runs:
         HOSTS=$(cat vars.txt)
         echo "HOSTS=$HOSTS" >> $GITHUB_OUTPUT
         rm -f vars.txt
+      shell: bash

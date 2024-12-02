@@ -37,4 +37,5 @@ runs:
         cat vars.txt
         echo "ECHO HOSTS=$(cat vars.txt)"
         echo "HOSTS=$(cat vars.txt)" >> $GITHUB_OUTPUT
+        echo "TEST="123" >> $GITHUB_OUTPUT
       shell: bash

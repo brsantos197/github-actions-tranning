@@ -6,6 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       hosts: ${{ steps.vars.outputs.HOSTS }}
+      test: ${{ steps.vars.outputs.TEST }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -15,7 +16,10 @@ jobs:
           vars: ${{ toJson(vars) }}
         id: vars
       - run: |
-          echo "Hosts: ${{ fromJson(steps.vars.outputs) }}"
+          echo "TEST: ${{ fromJson(steps.vars.outputs.TEST) }}"
+          echo "test: ${{ fromJson(steps.vars.outputs.test) }}"
+          echo "HOST: ${{ fromJson(steps.vars.outputs.HOST) }}"
+          echo "Hosts: ${{ fromJson(steps.vars.outputs.hosts) }}"
   log:
     runs-on: ubuntu-latest
     needs: vars

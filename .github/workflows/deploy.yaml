@@ -2,7 +2,7 @@ name: Deploy to hosts
 on:
   push:
     branches:
-      - main2
+      - main
 jobs:
   generate-vars:
     runs-on: ubuntu-latest
@@ -18,7 +18,9 @@ jobs:
         id: generate-vars
       - run: |
           ls -la
-          echo "HOSTS=$(cat vars.txt)" >> $GITHUB_OUTPUT
+          HOSTS=$(cat vars.txt)
+          echo "::set-output name=ip-list::$HOSTS"
+
 
   deploy:
     needs: generate-vars

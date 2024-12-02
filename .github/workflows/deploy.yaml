@@ -9,7 +9,7 @@ jobs:
   generate-vars:
     runs-on: ubuntu-latest
     outputs:
-      hosts: ${{ steps.generate-vars.outputs.hosts }}
+      hosts: ${{ steps.generate-vars.outputs.HOSTS }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3

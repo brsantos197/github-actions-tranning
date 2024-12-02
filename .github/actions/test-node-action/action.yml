@@ -34,12 +34,7 @@ runs:
       shell: bash
 
     - name: Executar script Node.js
-      id: execute-script
       run: |
         # Passa as variáveis para o script Node.js
         node ./index.js --vars='${{ inputs.vars }}'
-      shell: bash
-
-    - name: Capturar output
-      run: echo "HOSTS=${{ steps.execute-script.outputs.HOSTS }}"
       shell: bash

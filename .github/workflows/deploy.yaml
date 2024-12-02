@@ -2,11 +2,11 @@ name: Deploy to hosts
 on:
   push:
 jobs:
-  vars:
+  generate-vars:
     runs-on: ubuntu-latest
     outputs:
-      hosts: ${{ steps.vars.outputs.HOSTS }}
-      test: ${{ steps.vars.outputs.TEST }}
+      hosts: ${{ steps.generate-vars.outputs.HOSTS }}
+      test: ${{ steps.generate-vars.outputs.TEST }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -14,27 +14,28 @@ jobs:
         uses: ./.github/actions/test-node-action
         with:
           vars: ${{ toJson(vars) }}
-        id: vars
+        id: generate-vars
       - run: |
-          echo "TEST: ${{ steps.vars.outputs.TEST }}"
-          echo "test: ${{ steps.vars.outputs.test }}"
-          echo "HOST: ${{ steps.vars.outputs.HOST }}"
-          echo "Hosts: ${{ steps.vars.outputs.hosts }}"
+          echo "TEST: ${{ steps.generate-vars.outputs.TEST }}"
+          echo "test: ${{ steps.generate-vars.outputs.test }}"
+          echo "HOST: ${{ steps.generate-vars.outputs.HOST }}"
+          echo "Hosts: ${{ steps.generate-vars.outputs.hosts }}"
   log:
     runs-on: ubuntu-latest
-    needs: vars
+    needs: generate-vars
     steps:
       - name: Log vars
-        run: echo "LOGS ${{ needs.vars.outputs.hosts }}"
+        run: echo "LOGS ${{ needs.generate-vars.outputs.hosts }}"
 
-  deploy:
-    needs: vars
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        host: ${{ fromJson(needs.vars.outputs.hosts) }}
-    steps:
-      - name: Deploy to hosts
-        if: ${{ matrix.host }}
-        run: |
-          echo "Deploying to host: ${{ matrix.host }}"
+  # deploy:
+  #   needs: generate-vars
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       host: ${{ fromJson(needs.vars.outputs.hosts) }}
+  #   steps:
+  #     - name: Deploy to hosts
+  #       if: ${{ matrix.host }}
+  #       run: |
+  #         echo "Deploying to host: ${{ matrix.host }}"
+ 

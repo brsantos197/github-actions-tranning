@@ -5,8 +5,6 @@ const vars = args.find(arg => arg.startsWith('--vars='));
 const varsString = vars.split('=')[1];
 const varsObject = JSON.parse(varsString.replace(/\n/g, ''));
 
-const varsArray = Object.values(varsObject).map((value) => `${String(value).trim()}`);
+const varsArray = Object.values(varsObject).map((value) => value);
 
-
-console.log(varsArray)
-writeFileSync('vars.txt', JSON.stringify(varsArray), 'utf8')
+writeFileSync('vars.txt', JSON.stringify(varsArray))

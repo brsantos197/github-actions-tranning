@@ -3,7 +3,7 @@ name: Generate and Use IP Array
 on:
   push:
     branches:
-      - main
+      - main2
 
 jobs:
   generate-ips:

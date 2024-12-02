@@ -8,6 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       hosts: ${{ steps.generate-vars.outputs.hosts }}
+      ip-list: ${{ steps.generate-vars.outputs.ip-list }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -17,10 +19,15 @@ jobs:
           vars: ${{ toJson(vars) }}
         id: generate-vars
       - run: |
-          ls -la
-          HOSTS=$(cat vars.txt)
-          echo "HOSTS=$HOSTS"
-          echo "::set-output name=hosts::$HOSTS"
+          # Gera um array de IPs fictícios
+          IPS='["192.168.1.1", "192.168.1.2", "192.168.1.3"]'
+          echo "IPS=$IPS"
+          # Define o output com o array
+          echo "::set-output name=ip-list::$IPS"
+          # ls -la
+          # HOSTS=$(cat vars.txt)
+          # echo "HOSTS=$HOSTS"
+          # echo "::set-output name=hosts::$HOSTS"
 
 
   deploy:
@@ -28,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        host: ${{ fromJson(needs.generate-vars.outputs.hosts) }}
+        host: ${{ fromJson(needs.generate-vars.outputs.ip-list) }}
     steps:
       - name: Deploy to hosts
         if: ${{ matrix.host }}

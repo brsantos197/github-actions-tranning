@@ -8,4 +8,4 @@ const varsObject = JSON.parse(varsString.replace(/\n/g, ''));
 const varsArray = Object.values(varsObject).map((value) => `${String(value).trim()}`);
 
 console.log('console.log(varsArray)', varsArray)
-writeFileSync('vars.txt', JSON.stringify(['host1', 'host2']))
+writeFileSync('vars.txt', JSON.stringify(varsArray))

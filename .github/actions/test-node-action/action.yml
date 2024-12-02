@@ -33,5 +33,8 @@ runs:
     - name: Executar script Node.js
       run: |
         node ./index.js --vars='${{ inputs.vars }}'
+        ls -la
+        cat vars.txt
+        echo "ECHO HOSTS=$(cat vars.txt)"
         echo "HOSTS=$(cat vars.txt)" >> $GITHUB_OUTPUT
       shell: bash

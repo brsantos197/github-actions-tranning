@@ -1,41 +1,13 @@
-name: List Vars Context
+name: Call a reusable workflow and use its outputs
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
-  list-vars:
+  job1:
+    uses: ./.github/actions/test-node-action
+  job2:
     runs-on: ubuntu-latest
+    needs: job1
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Usar minha ação personalizada
-        uses: ./.github/actions/test-node-action
-        with:
-          vars: ${{ toJson(vars) }}
-
-      # - name: List all vars
-      #   uses: easyware-io/export-to-env@v1
-      #   with:
-      #     vars: ${{ toJSON(varS) }}
-      # - run: |
-      #     # Prefixo para filtrar
-      #     prefix="HOST_"
-
-      #     # Criar um array vazio
-      #     declare -a filtered_env_array
-
-      #     # Filtrar as variáveis de ambiente que começam com o prefixo
-      #     while IFS='=' read -r name value; do
-      #       if [[ "$name" == $prefix* ]]; then
-      #         filtered_env_array+=("'$value'")
-      #       fi
-      #     done < <(env)
-
-      #     # Exibir as variáveis de ambiente filtradas
-      #     for var in "${filtered_env_array[@]}"; do
-      #       echo "$var"
-      #     done
+      - run: echo ${{ needs.job1.outputs.firstword }} ${{ needs.job1.outputs.secondword }}

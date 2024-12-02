@@ -1,6 +1,8 @@
 name: Deploy to hosts
 on:
   push:
+    branches:
+      - main2
 jobs:
   generate-vars:
     runs-on: ubuntu-latest

@@ -20,7 +20,7 @@ jobs:
       - run: |
           echo "TEST: ${{ steps.generate-vars.outputs.TEST }}"
           echo "test: ${{ steps.generate-vars.outputs.test }}"
-          echo "HOST: ${{ steps.generate-vars.outputs.HOST }}"
+          echo "HOST: ${{ steps.generate-vars.outputs.HOSTS }}"
           echo "Hosts: ${{ steps.generate-vars.outputs.hosts }}"
   log:
     runs-on: ubuntu-latest

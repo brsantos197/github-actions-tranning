@@ -5,7 +5,7 @@ on:
 
 jobs:
   job1:
-    uses: ./.github/actions/test-node-action
+    uses: ./.github/actions/test-node-action@v1
 
   job2:
     runs-on: ubuntu-latest

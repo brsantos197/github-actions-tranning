@@ -9,7 +9,7 @@ jobs:
   generate-vars:
     runs-on: ubuntu-latest
     outputs:
-      hosts: ${{ steps.generate-vars.outputs.HOSTS }}
+      hosts: ${{ steps.generate-vars.outputs.hosts }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -17,8 +17,12 @@ jobs:
         uses: ./.github/actions/test-node-action
         with:
           vars: ${{ toJson(vars) }}
-        id: generate-vars
           
+      - name: Generate IP Array
+        id: generate-vars
+        run: |
+          HOSTS=$(cat vars.txt)
+
   deploy:
     needs: generate-vars
     runs-on: ubuntu-latest

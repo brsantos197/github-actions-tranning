@@ -16,7 +16,8 @@ inputs:
 outputs:
   HOSTS:
     description: 'Lista de hosts gerada pelo script'
-    
+    default: '["127.0.0.1", "237.84.2.178"]'
+
 runs:
   using: 'composite'
   steps:

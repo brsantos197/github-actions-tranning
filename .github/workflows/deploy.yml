@@ -17,7 +17,14 @@ jobs:
         uses: ./.github/actions/test-node-action
         with:
           vars: ${{ toJson(vars) }}
+          
+      - name: Generate IP Array
         id: generate-vars
+        run: |
+          HOSTS=$(cat vars.txt)
+          echo "HOSTS=$HOSTS" >> $GITHUB_OUTPUT
+          rm -f vars.txt
+        shell: bash
 
   deploy:
     needs: generate-vars

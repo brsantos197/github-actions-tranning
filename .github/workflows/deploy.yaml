@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        host: ${{ fromJson(needs.generate-vars.outputs.ip-list) }}
+        host: ${{ fromJson(needs.generate-vars.outputs.hosts) }}
     steps:
       - name: Deploy to hosts
         if: ${{ matrix.host }}

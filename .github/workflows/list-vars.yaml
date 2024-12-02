@@ -5,7 +5,7 @@ on:
 
 jobs:
   job1:
-    uses: brsantos197/github-actions/.github/actions/test-node-action/action.yml@main
+    uses: ./.github/actions/test-node-action
 
   job2:
     runs-on: ubuntu-latest

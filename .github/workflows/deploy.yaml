@@ -1,34 +1,30 @@
 name: Deploy to hosts
+
 on:
   push:
     branches:
       - main
+
 jobs:
   generate-vars:
     runs-on: ubuntu-latest
     outputs:
       hosts: ${{ steps.generate-vars.outputs.hosts }}
-      ip-list: ${{ steps.generate-vars.outputs.ip-list }}
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Usar minha ação personalizada
         uses: ./.github/actions/test-node-action
-        id: generate-vars
         with:
           vars: ${{ toJson(vars) }}
-      - run: |
-          # Gera um array de IPs fictícios
-          IPS='["192.168.1.1", "192.168.1.2", "192.168.1.3"]'
-          echo "IPS=$IPS"
-          # Define o output com o array
-          echo "::set-output name=ip-list::$IPS"
-          # ls -la
-          # HOSTS=$(cat vars.txt)
-          # echo "HOSTS=$HOSTS"
-          # echo "::set-output name=hosts::$HOSTS"
-
+          
+      - name: Generate IP Array
+        id: generate-vars
+        run: |
+          ls -la
+          HOSTS=$(cat vars.txt)
+          echo "HOSTS=$HOSTS"
+          echo "::set-output name=hosts::$HOSTS"
 
   deploy:
     needs: generate-vars

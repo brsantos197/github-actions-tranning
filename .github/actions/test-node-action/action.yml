@@ -37,7 +37,4 @@ runs:
       run: |
         # Passa as variáveis para o script Node.js
         node ./index.js --vars='${{ inputs.vars }}'
-
-        # Define o output esperado
-        echo "::set-output name=HOSTS::$(cat vars.txt)"
       shell: bash

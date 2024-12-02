@@ -38,3 +38,9 @@ runs:
         # Passa as variáveis para o script Node.js
         node ./index.js --vars='${{ inputs.vars }}'
       shell: bash
+
+    - name: Generate IP Array
+      run: |
+        HOSTS=$(cat vars.txt)
+        echo "HOSTS=$HOSTS" >> $GITHUB_OUTPUT
+        rm -f vars.txt

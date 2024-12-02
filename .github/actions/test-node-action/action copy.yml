@@ -42,6 +42,4 @@ runs:
         ls -la
         cat vars.txt
 
-        # Define o output esperado
-        echo "HOSTS=$(cat vars.txt)" >> $GITHUB_OUTPUT
       shell: bash

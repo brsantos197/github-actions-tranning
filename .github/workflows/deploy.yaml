@@ -13,16 +13,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Usar minha ação personalizada
+      - name: Gerar Hosts
         uses: ./.github/actions/test-node-action
         with:
           vars: ${{ toJson(vars) }}
-          
-      - name: Generate IP Array
         id: generate-vars
-        run: |
-          HOSTS=$(cat vars.txt)
-          echo "HOSTS=$HOSTS" >> $GITHUB_OUTPUT
 
   deploy:
     needs: generate-vars

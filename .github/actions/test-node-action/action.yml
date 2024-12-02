@@ -38,10 +38,6 @@ runs:
         # Passa as variáveis para o script Node.js
         node ./index.js --vars='${{ inputs.vars }}'
 
-        # Exibe informações de debug (remova em produção)
-        ls -la
-        cat vars.txt
-
         # Define o output esperado
         echo "::set-output name=HOSTS::$(cat vars.txt)"
       shell: bash

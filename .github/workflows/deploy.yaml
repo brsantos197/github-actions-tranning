@@ -17,6 +17,9 @@ jobs:
         with:
           vars: ${{ toJson(vars) }}
         id: generate-vars
+      - run: |
+          ls -la
+          cat vars.txt
   log:
     runs-on: ubuntu-latest
     needs: generate-vars

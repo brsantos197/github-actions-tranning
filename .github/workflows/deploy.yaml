@@ -23,8 +23,7 @@ jobs:
         run: |
           ls -la
           HOSTS=$(cat vars.txt)
-          echo "HOSTS=$HOSTS"
-          echo "::set-output name=hosts::$HOSTS"
+          echo "HOSTS=$HOSTS" >> $GITHUB_OUTPUT
 
   deploy:
     needs: generate-vars

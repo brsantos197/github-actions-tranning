@@ -1,4 +1,4 @@
-name: Deploy to hosts
+name: Main Workflow
 
 on:
   push:
@@ -6,28 +6,25 @@ on:
       - main
 
 jobs:
-  generate-vars:
+  generate-hosts:
     runs-on: ubuntu-latest
     outputs:
-      hosts: ${{ steps.generate-vars.outputs.HOSTS }}
+      hosts: ${{ steps.custom-action.outputs.HOSTS }}
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Usar minha ação personalizada
+      - name: Usar a ação reutilizável
         uses: ./.github/actions/test-node-action
         with:
           vars: ${{ toJson(vars) }}
-        id: generate-vars
+          node_version: '20.11.1'
+        id: custom-action
 
   deploy:
-    needs: generate-vars
+    needs: generate-hosts
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        host: ${{ fromJson(needs.generate-vars.outputs.hosts) }}
+        host: ${{ fromJson(needs.generate-hosts.outputs.hosts) }}
     steps:
-      - name: Deploy to hosts
-        if: ${{ matrix.host }}
+      - name: Deploy to host
         run: |
-          echo "Deploying to host: ${{ matrix.host }}"
- 
+          echo "Deploying to ${{ matrix.host }}"

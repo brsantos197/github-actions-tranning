@@ -9,7 +9,7 @@ jobs:
   generate-ips:
     runs-on: ubuntu-latest
     outputs:
-      ip-list: ${{ steps.set-output.outputs.ip-list }}
+      hosts: ${{ steps.set-output.outputs.hosts }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -20,18 +20,23 @@ jobs:
       - name: Generate IP Array
         id: set-output
         run: |
-          # Gera um array de IPs fictícios
-          IPS='["192.168.1.1", "192.168.1.2", "192.168.1.3"]'
-          echo "IPS=$IPS"
-          # Define o output com o array
-          echo "::set-output name=ip-list::$IPS"
+          ls -la
+          HOSTS=$(cat vars.txt)
+          echo "HOSTS=$HOSTS"
+          echo "::set-output name=hosts::$HOSTS"
+          
+          # # Gera um array de IPs fictícios
+          # IPS='["192.168.1.1", "192.168.1.2", "192.168.1.3"]'
+          # echo "IPS=$IPS"
+          # # Define o output com o array
+          # echo "::set-output name=ip-list::$IPS"
 
   use-ips:
     needs: generate-ips
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ip: ${{ fromJson(needs.generate-ips.outputs.ip-list) }}
+        ip: ${{ fromJson(needs.generate-ips.outputs.hosts) }}
     steps:
       - name: Process IP
         run: |

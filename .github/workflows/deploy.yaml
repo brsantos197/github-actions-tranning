@@ -8,7 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       hosts: ${{ steps.generate-vars.outputs.HOSTS }}
-      test: ${{ steps.generate-vars.outputs.TEST }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -19,23 +18,17 @@ jobs:
         id: generate-vars
       - run: |
           ls -la
-          cat vars.txt
-  log:
-    runs-on: ubuntu-latest
-    needs: generate-vars
-    steps:
-      - name: Log vars
-        run: cat vars.txt
+          echo "HOSTS=$(cat vars.txt)" >> $GITHUB_OUTPUT
 
-  # deploy:
-  #   needs: generate-vars
-  #   runs-on: ubuntu-latest
-  #   strategy:
-  #     matrix:
-  #       host: ${{ fromJson(needs.vars.outputs.hosts) }}
-  #   steps:
-  #     - name: Deploy to hosts
-  #       if: ${{ matrix.host }}
-  #       run: |
-  #         echo "Deploying to host: ${{ matrix.host }}"
+  deploy:
+    needs: generate-vars
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        host: ${{ fromJson(needs.generate-vars.outputs.hosts) }}
+    steps:
+      - name: Deploy to hosts
+        if: ${{ matrix.host }}
+        run: |
+          echo "Deploying to host: ${{ matrix.host }}"
  

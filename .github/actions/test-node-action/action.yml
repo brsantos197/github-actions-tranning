@@ -13,7 +13,10 @@ inputs:
     description: 'Versão do Node.js a ser usada'
     required: false
     default: '20.11.1'
-
+outputs:
+  HOSTS:
+    description: 'Lista de hosts gerada pelo script'
+    
 runs:
   using: 'composite'
   steps:

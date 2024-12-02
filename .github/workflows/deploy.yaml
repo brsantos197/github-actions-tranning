@@ -7,7 +7,7 @@ jobs:
   generate-vars:
     runs-on: ubuntu-latest
     outputs:
-      hosts: ${{ steps.generate-vars.outputs.HOSTS }}
+      hosts: ${{ steps.generate-vars.outputs.hosts }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -20,7 +20,7 @@ jobs:
           ls -la
           HOSTS=$(cat vars.txt)
           echo "HOSTS=$HOSTS"
-          echo "::set-output name=ip-list::$HOSTS"
+          echo "::set-output name=hosts::$HOSTS"
 
 
   deploy:

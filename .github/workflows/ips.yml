@@ -3,7 +3,7 @@ name: Generate and Use IP Array
 on:
   push:
     branches:
-      - main2
+      - main
 
 jobs:
   generate-ips:
@@ -11,6 +11,10 @@ jobs:
     outputs:
       ip-list: ${{ steps.set-output.outputs.ip-list }}
     steps:
+      - name: Usar minha ação personalizada
+        uses: ./.github/actions/test-node-action
+        with:
+          vars: ${{ toJson(vars) }}
       - name: Generate IP Array
         id: set-output
         run: |

@@ -22,6 +22,7 @@ jobs:
         id: generate-vars
         run: |
           HOSTS=$(cat vars.txt)
+          echo "HOSTS=$HOSTS" >> $GITHUB_OUTPUT
 
   deploy:
     needs: generate-vars

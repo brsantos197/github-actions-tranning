@@ -1,0 +1,17 @@
+name: Manual Trigger Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      hora_execucao:
+        description: "Horário de execução (UTC) no formato HH:mm"
+        required: true
+        default: "12:00"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Exibir horário especificado
+        run: |
+          echo "O horário especificado foi: ${{ github.event.inputs.hora_execucao }}"
